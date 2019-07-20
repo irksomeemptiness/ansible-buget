@@ -24,6 +24,14 @@
     repo: https://github.com/loic-sharma/BaGet.git
     dest: /opt/baget
 
+- name: Copy file Dockerfile
+  copy:
+    src: Dockerfile
+    dest: /opt/baget/Dockerfile
+    owner: root
+    group: root
+    mode: '0775'
+
 - name: build docker image
   shell: "docker build -t baget/baget-server -f /opt/baget/Dockerfile /opt/baget/."
   ignore_errors: true
