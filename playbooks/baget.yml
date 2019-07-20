@@ -1,0 +1,6 @@
+---
+- name: Buget install
+  hosts: test-stand
+  sudo: yes
+  roles:
+  - { role: baget }

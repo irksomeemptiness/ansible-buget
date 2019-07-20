@@ -1,0 +1,57 @@
+---
+
+- name: Import docker repo
+  shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+  ignore_errors: true
+
+- name: Install packages
+  yum: name={{ item }} state=present
+  with_items: '{{role_rpm_packages}}'
+
+- name: enable service docker
+  systemd:
+    name: docker
+    enabled: yes
+    masked: no
+
+- name: start service docker
+  systemd:
+    state: started
+    name: docker
+
+- name: clone baget project
+  git:
+    repo: https://github.com/loic-sharma/BaGet.git
+    dest: /opt/baget
+
+- name: build docker image
+  shell: "docker build -t baget/baget-server -f /opt/baget/Dockerfile /opt/baget/."
+  ignore_errors: true
+
+- name: Copy file with owner and permissions
+  copy:
+    src: baget.env
+    dest: /opt/baget/baget.env
+    owner: root
+    group: root
+    mode: '0775'
+
+- name: install python library for docker
+  shell: "pip install docker"
+  ignore_errors: true
+
+- name: Creates directory
+  file:
+    path: /opt/baget-data
+    state: directory
+
+- name: application container
+  docker_container:
+    name: baget
+    image: baget/baget-server
+    state: started
+    volumes:
+    - /opt/baget-data:/var/baget
+    ports:
+    - "5555:80"
+    env_file: /opt/baget/baget.env

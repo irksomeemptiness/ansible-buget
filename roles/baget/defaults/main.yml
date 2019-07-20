@@ -1,0 +1,14 @@
+---
+role_rpm_packages:
+  - git
+  - yum-utils
+  - device-mapper-persistent-data
+  - lvm2
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - python-setuptools
+  - python-pip
+  - python-wheel
+
+
