@@ -1,6 +1,6 @@
 git clone https://github.com/sparklecast1/ansible.git
 
-cd anible
+cd ansible
 
 ansible-playbook -vv -i inventory/hosts -l test-stand playbooks/baget.yml -k -K -u root
 
