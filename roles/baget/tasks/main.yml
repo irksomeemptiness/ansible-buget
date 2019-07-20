@@ -1,7 +1,6 @@
 ---
 - name: Install packages
   yum: name=yum-utils state=present
-  with_items: '{{role_rpm_packages}}'
 
 - name: Import docker repo
   shell: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
