@@ -1,2 +1,2 @@
 [test-stand]
-test     ansible_host=192.168.56.104
+test     ansible_host=192.168.56.105
