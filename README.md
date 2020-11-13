@@ -1,5 +1,5 @@
 # Install
-git clone https://github.com/sparklecast1/ansible.git
+git clone https://github.com/sparklecast1/ansible-buget.git
 
 cd ansible
 
